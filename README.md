@@ -5,7 +5,7 @@ Feuille de route de mon projet de vote.
 J'ai décidé de construire le projet en 5 étapes.
 
 Etape 1 : On importe la librairie openzepplin pour importer Ownable à notre contrat.
-On instaure nos variables essentielles pour la session vote.
+On instaure nos variables essentielles et event pour la session vote.
 (WorkflowStatus, status, whitelist, listeWhitelisted, Proposal, proposals, winningProposalId)
 
 Etape 2 : On construit les fonctions accessible uniquement par l'Owner.
