@@ -138,8 +138,20 @@ contract Vote is Ownable {
     function getStatus() public view returns (string memory) {
         string memory currentStatus;
 
-        if (status == WorkflowStatus.RegisteringVoters) {           // On retourne les statuts selon processus de vote
+        if (status == WorkflowStatus.RegisteringVoters) {
             currentStatus = "Enregistrement des votants";
         } else if (status == WorkflowStatus.ProposalsRegistrationStarted) {
-            currentStatus = "Depot des propositions";                           // on vérifie si on est pas dans chacune des phases
-        } else if (status == WorkflowStatus.ProposalsRegistrationEnded)
+            currentStatus = "Depot des propositions";
+        } else if (status == WorkflowStatus.ProposalsRegistrationEnded) {
+            currentStatus = "Fin depot des propositions";
+        } else if (status == WorkflowStatus.VotingSessionStarted) {
+            currentStatus = "Session de vote en cours";
+        } else if (status == WorkflowStatus.VotingSessionEnded) {
+            currentStatus = "Vote termine";
+        } else if (status == WorkflowStatus.VotesTallied) {
+            currentStatus = "Resultat comptabilise";
+        }
+
+        return currentStatus;
+    }
+}
