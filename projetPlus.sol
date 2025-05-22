@@ -48,7 +48,7 @@ contract Vote is Ownable {
 
     // Etape 2 : fonctions appelées par onlyOwner du contrat
 
-    function ajouterAdresse(address _adresse) public onlyOwner {
+    function ajouterAdresse(address _adresse) external onlyOwner {
         require(!whitelist[_adresse], "Adresse deja whitelistee !"); //require pour éviter tout doublon
         
         listeWhitelisted.push(_adresse); // on push ensuite l'adresse dans la whitelist que seul l'owner décide
@@ -64,31 +64,31 @@ contract Vote is Ownable {
     // creation des fonctions  selon les phases de la session vote
     // variable status change selon etape du vote, on applique require pour verifier que nous sommes bien à l'étape precedente pour lui affectuer sa nouvelle valeur de statut
 
-    function startProposalsRegistration() public onlyOwner {
+    function startProposalsRegistration() external onlyOwner {
         require(status == WorkflowStatus.RegisteringVoters, "Etape precedente requise");
         emit WorkflowStatusChange(status, WorkflowStatus.ProposalsRegistrationStarted); //
         status = WorkflowStatus.ProposalsRegistrationStarted; 
     }
 
-    function endProposalsRegistration() public onlyOwner {
+    function endProposalsRegistration() external onlyOwner {
         require(status == WorkflowStatus.ProposalsRegistrationStarted, "Etape incorrecte");
         emit WorkflowStatusChange(status, WorkflowStatus.ProposalsRegistrationEnded); 
         status = WorkflowStatus.ProposalsRegistrationEnded;
     }
 
-    function startVotingSession() public onlyOwner {
+    function startVotingSession() external onlyOwner {
         require(status == WorkflowStatus.ProposalsRegistrationEnded, "Propositions pas terminees");
         emit WorkflowStatusChange(status, WorkflowStatus.VotingSessionStarted); 
         status = WorkflowStatus.VotingSessionStarted;
     }
 
-    function endVotingSession() public onlyOwner {
+    function endVotingSession() external onlyOwner {
         require(status == WorkflowStatus.VotingSessionStarted, "Vote pas en cours");
         emit WorkflowStatusChange(status, WorkflowStatus.VotingSessionEnded); 
         status = WorkflowStatus.VotingSessionEnded;
     }
 
-    function tallyVotes() public onlyOwner {
+    function tallyVotes() external onlyOwner {
         require(status == WorkflowStatus.VotingSessionEnded, "Vote pas encore termine"); // condition que le vote soit terminé pour appeler la fonction
 
         uint maxVotes = 0;
