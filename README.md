@@ -17,5 +17,5 @@ Etape 3 : On créer les fonctions pour élécteurs.
 Etape 4 : On construit nos fonctions pour la lecture des résultats et la transparence.
 (function getWinner, function getStatus, function getVoter)
 
-Etape 5 : La rénitialisation de la session PAR l'OWNER
+Etape 5 : La rénitialisation de la session Par l'OWNER
 (function reinitialiserSession)
